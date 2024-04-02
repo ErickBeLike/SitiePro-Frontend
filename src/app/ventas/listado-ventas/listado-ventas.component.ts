@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { VentasService } from '../../services/ventas/ventas.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-listado-ventas',
@@ -38,4 +39,19 @@ export class ListadoVentasComponent implements OnInit{
   editarVenta(id: any): void { 
     this.router.navigate(['/ventas/registro-ventas', id]); 
   }
+
+  generarPDF(idVenta: any): void {
+    const ventaSeleccionada = this.ventas.find(venta => venta.idVenta === idVenta);
+    if (ventaSeleccionada) {
+      const doc = new jsPDF();
+      doc.text(`Venta ID: ${ventaSeleccionada.idVenta}`, 10, 10);
+      doc.text(`Fecha de Venta: ${ventaSeleccionada.fechaVenta}`, 10, 20);
+      doc.text(`Cliente: ${ventaSeleccionada.idCliente.nombreCliente} ${ventaSeleccionada.idCliente.apellidoPaCliente}`, 10, 30);
+      doc.text(`Servicio: ${ventaSeleccionada.idServicio.nombreServicio}`, 10, 40);
+      doc.text(`Empleado: ${ventaSeleccionada.idEmpleado.nombreEmpleado} ${ventaSeleccionada.idEmpleado.apellidoPaEmpleado}`, 10, 50);
+      doc.text(`Total: ${ventaSeleccionada.total}`, 10, 60);
+      doc.save(`Venta_${idVenta}.pdf`);
+    }
+  }
+  
 }

@@ -30,9 +30,11 @@
                             <td>Id: <strong>{{instalacion.idEmpleadoInstalador.idEmpleado}}</strong> - {{instalacion.idEmpleadoInstalador.nombreEmpleado}} {{instalacion.idEmpleadoInstalador.apellidoPaEmpleado}}</td>
                             <td>{{ instalacion.fechaInstalacion | date:'dd/MM/yyyy' }}</td>
                             <td>
+                                <i class="fas fa-file-pdf fa-lg me-3 text-primary" style="cursor: pointer;" (click)="generarPDF(instalacion.idInstalacion)"></i>
                                 <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarInstalacion(instalacion.idInstalacion)"></i>
                                 <i (click)="eliminarInstalacion(instalacion)" class="fa-solid fa-trash" style="color: #c00c0c; cursor: pointer;"></i>
                             </td>
+                            
                         </tr>
                     </tbody>
                 </table>

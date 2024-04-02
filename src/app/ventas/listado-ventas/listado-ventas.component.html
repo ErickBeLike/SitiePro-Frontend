@@ -32,6 +32,7 @@
                             <td>Id: <strong>{{ venta.idEmpleado.idEmpleado }}</strong> - {{ venta.idEmpleado.nombreEmpleado }} {{venta.idEmpleado.apellidoPaEmpleado}}</td>
                             <td><strong>{{ venta.total }}</strong></td>
                             <td>
+                                <i class="fas fa-file-pdf fa-lg me-3 text-primary" style="cursor: pointer;" (click)="generarPDF(venta.idVenta)"></i>
                                 <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarVenta(venta.idVenta)"></i>
                                 <i (click)="eliminarVenta(venta)" class="fa-solid fa-trash" style="color: #c00c0c; cursor: pointer;"></i>
                             </td>
