@@ -1,1 +1,45 @@
-<p>listado-clientes works!</p>
+<app-sidebar></app-sidebar>
+<section class="ochenta">
+    <div class="container mt-4">
+        <div class="mx-3">
+            <span class="h1">
+                Clientes
+            </span>
+            <div class="card-body mt-4">
+                <span class="h3">
+                    Gestionar
+                </span>
+                <button class="btn btn-dark btn-lg float-end" routerLink='/clientes/registro-clientes'>Agregar cliente</button>
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre(s) Cliente</th>
+                            <th>Apellido paterno</th>
+                            <th>Apellidos materno</th>
+                            <th>Dirección</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cliente of clientes">
+                            <td><strong>{{ cliente.idCliente }}</strong></td>
+                            <td>{{ cliente.nombreCliente }}</td>
+                            <td>{{ cliente.apellidoPaCliente }}</td>
+                            <td>{{ cliente.apellidoMaCliente }}</td>
+                            <td>{{ cliente.direccionCliente }}</td>
+                            <td>{{ cliente.correoCliente }}</td>
+                            <td>{{ cliente.telefonoCliente }}</td>
+                            <td>
+                                <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarCliente(cliente.idCliente)"></i>
+                                <i (click)="eliminar(cliente)" class="fa-solid fa-trash" style="color: #c00c0c; cursor: pointer;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</section>

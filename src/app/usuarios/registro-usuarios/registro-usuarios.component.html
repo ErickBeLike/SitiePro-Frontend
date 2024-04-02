@@ -1,1 +1,41 @@
-<p>registro-usuarios works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" id="form-title">{{ titulo }}</h2>
+            <form [formGroup]="formUsuario" (ngSubmit)="agregarOEditar()">
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <label for="userName">Nombre de Usuario</label>
+                        <input type="text" class="form-control" id="userName" formControlName="nombreUsuario" (input)="onInput($event)" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="userRol">Rol</label>
+                        <select class="form-control" id="userRol" formControlName="idRol" required>
+                            <option value="" disabled selected>Seleccionar rol...</option>
+                            <option *ngFor="let rol of roles" [value]="rol.idRol">{{ rol.idRol }} - {{ rol.nombreRol }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input type="email" class="form-control" id="email" formControlName="correoUsuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="input-group">
+                        <input *ngIf="!showPassword" type="password" class="form-control" id="password" formControlName="contrasenaUsuario" required>
+                        <input *ngIf="showPassword" type="text" class="form-control" id="passwordVisible" formControlName="contrasenaUsuario" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                                <i class="fa" [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-danger" routerLink='/usuarios/listado-usuarios'>Cancelar</button>
+                <button type="submit" class="btn btn-success" [disabled]="formUsuario.invalid">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

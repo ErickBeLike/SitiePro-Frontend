@@ -1,1 +1,61 @@
-<p>registro-empleados works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" id="form-title">{{ titulo }}</h2>
+            <form [formGroup]="formEmpleado" (ngSubmit)="agregarOEditar()">
+                <div class="form-group">
+                    <label for="employeeName">Nombre(s)</label>
+                    <input type="text" class="form-control" id="employeeName" formControlName="nombreEmpleado" (input)="onInput($event)" required>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="employeeLastName1">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="employeeLastName1" formControlName="apellidoPaEmpleado" (input)="onInputPa($event)" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="employeeLastName2">Apellido Materno</label>
+                        <input type="text" class="form-control" id="employeeLastName2" formControlName="apellidoMaEmpleado" (input)="onInputMa($event)">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="employeeRole">Cargo</label>
+                        <select class="form-control" id="employeeRole" formControlName="idCargo" required>
+                            <option value="" disabled selected>Seleccionar cargo...</option>
+                            <option *ngFor="let cargo of cargos" [value]="cargo.idCargo">{{ cargo.idCargo }} - {{ cargo.nombreCargo }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="employeeSex">Sexo</label>
+                        <select type="text" class="form-control" id="employeeSex" formControlName="idSexo" required>
+                            <option value="" disabled selected>Seleccionar sexo...</option>
+                            <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">{{ sexo.idSexo }} - {{ sexo.nombreSexo }}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employeDate">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="employeDate" formControlName="fechaDeNacimiento" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employeeEmail">Correo</label>
+                    <input type="email" class="form-control" id="employeeEmail" formControlName="correoEmpleado" required>
+                </div>
+                <div class="form-group">
+                    <label for="employeePhone">Teléfono</label>
+                    <input type="text" class="form-control" id="employeePhone" formControlName="numeroEmpleado" (input)="inTelefonoInput($event)" required>
+                </div>
+                <div class="form-group">
+                    <label for="direction">Dirección</label>
+                    <input type="text" class="form-control" id="direction" formControlName="direccionEmpleado" required>
+                </div>
+                
+                <button type="button" class="btn btn-danger" routerLink='/empleados/listado-empleados'>Cancelar</button>
+                <button type="submit" class="btn btn-success" [disabled]="formEmpleado.invalid">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

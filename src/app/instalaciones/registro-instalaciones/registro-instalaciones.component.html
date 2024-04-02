@@ -1,1 +1,38 @@
-<p>registro-instalaciones works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" id="form-title">{{ titulo }}</h2>
+            <form [formGroup]="formInstalacion" (ngSubmit)="agregarOEditar()">
+                <div class="form-group">
+                    <label for="venta">Venta</label>
+                    <select class="form-control" id="venta" formControlName="idVenta" required>
+                        <option value="" disabled selected>Seleccionar venta...</option>
+                        <option *ngFor="let venta of ventas" [value]="venta.idVenta">{{ venta.idVenta }} ({{venta.fechaVenta | date:'dd/MM/yyyy hh:mm:ss a'}})</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="responsable">Quien realiza el registro</label>
+                    <select class="form-control" id="responsable" formControlName="idEmpleadoRegistro" required>
+                        <option value="" disabled selected>Seleccionar responsable...</option>
+                        <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{ empleado.idEmpleado }} ( {{empleado.idCargo.nombreCargo}} ) - {{empleado.nombreEmpleado}} {{empleado.apellidoPaEmpleado}}</option>
+                    </select>
+                    </div>
+                    <div class="col-md-6">
+                            <label for="instalador">Instalador</label>
+                        <select class="form-control" id="instalador" formControlName="idEmpleadoInstalador" required>
+                            <option value="" disabled selected>Seleccionar instalador...</option>
+                            <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{ empleado.idEmpleado }} ( {{empleado.idCargo.nombreCargo}} ) - {{empleado.nombreEmpleado}} {{empleado.apellidoPaEmpleado}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInstalacion">Fecha de Instalación</label>
+                    <input type="date" class="form-control" id="fechaInstalacion" formControlName="fechaInstalacion" required>
+                </div>
+                <button type="button" class="btn btn-danger" routerLink='/instalaciones/listado-instalaciones'>Cancelar</button>
+                <button type="submit" class="btn btn-success" [disabled]="formInstalacion.invalid">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,32 @@
-<p>registro-ventas works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" id="form-title">{{ titulo }}</h2>
+            <form [formGroup]="formVenta" (ngSubmit)="agregarOEditar()">
+                <div class="form-group">
+                    <label for="client">Cliente</label>
+                    <select class="form-control" id="client" formControlName="idCliente" required>
+                        <option value="" disabled selected>Seleccionar cliente...</option>
+                        <option *ngFor="let cliente of clientes" [value]="cliente.idCliente">{{ cliente.idCliente }} - {{cliente.nombreCliente}} {{cliente.apellidoPaCliente}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="service">Servicio</label>
+                    <select class="form-control" id="service" formControlName="idServicio" required>
+                        <option value="" disabled selected>Seleccionar servicio...</option>
+                        <option *ngFor="let servicio of servicios" [value]="servicio.idServicio">{{ servicio.idServicio }} - {{servicio.nombreServicio}} </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="employee">Empleado</label>
+                    <select class="form-control" id="employee" formControlName="idEmpleado" required>
+                        <option value="" disabled selected>Seleccionar empleado...</option>
+                        <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{ empleado.idEmpleado }} ( {{empleado.idCargo.nombreCargo}} ) - {{empleado.nombreEmpleado}} {{empleado.apellidoPaEmpleado}}</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-danger" routerLink='/ventas/listado-ventas'>Cancelar</button>
+                <button type="submit" class="btn btn-success" [disabled]="formVenta.invalid">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,53 @@
-<p>listado-usuarios works!</p>
+<app-sidebar></app-sidebar>
+<section class="ochenta">
+    <div class="container mt-4">
+        <div class="mx-3">
+            <span class="h1">
+                Usuarios
+            </span>
+            <div class="card-body mt-4">
+                <span class="h3">
+                    Gestionar
+                </span>
+                <button class="btn btn-dark btn-lg float-end" routerLink='/usuarios/registro-usuarios'>Agregar usuario</button>
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre de Usuario</th>
+                            <th>Rol</th>
+                            <th>Correo</th>
+                            <th>Contraseña</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <td>{{ usuario.idUsuario }}</td>
+                            <td>{{ usuario.nombreUsuario }}</td>
+                            <td>{{ usuario.idRol.nombreRol }}</td>
+                            <td>{{ usuario.correoUsuario }}</td>
+                            <td>
+                                <ng-container *ngIf="contrasenasVisiblesPorFila[usuario.idUsuario]; else asteriscos">{{ usuario.contrasenaUsuario }}</ng-container>
+                                <ng-template #asteriscos>{{ ocultarContrasena(usuario.contrasenaUsuario) }}</ng-template>
+                            </td>
+                            <td>
+                                <button class="btn btn-link btn-sm" (click)="alternarVisibilidadContrasenaFila(usuario.idUsuario)">
+                                  <ng-container *ngIf="!contrasenasVisiblesPorFila[usuario.idUsuario]">
+                                    <i class="fa-solid fa-eye-slash me-2"></i>
+                                  </ng-container>
+                                  <ng-container *ngIf="contrasenasVisiblesPorFila[usuario.idUsuario]">
+                                    <i class="fa-solid fa-eye me-2"></i>
+                                  </ng-container>
+                                </button>
+                                <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarUsuario(usuario.idUsuario)"></i>
+                                <i (click)="eliminar(usuario)" class="fa-solid fa-trash me-3" style="color: #c00c0c; cursor: pointer;"></i>
+                              </td>
+                              
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</section>

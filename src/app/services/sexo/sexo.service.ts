@@ -5,18 +5,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CargosService {
+export class SexoService {
 
-  private apiUrl = 'http://localhost:8080/api/cargos';
+  private apiUrl = 'http://localhost:8080/api/sexo';
 
   constructor(private http: HttpClient) { }
 
-  obtenerTodosLosCargos(): Observable<any[]> {
+  obtenerTodosLosSexos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  buscarCargoPorId(id: number): Observable<any> {
+  buscarSexoPorId(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
-
 }

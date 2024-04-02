@@ -1,1 +1,41 @@
-<p>listado-servicios works!</p>
+<app-sidebar></app-sidebar>
+<section class="ochenta">
+    <div class="container mt-4">
+        <div class="mx-3">
+            <span class="h1">
+                Servicios
+            </span>
+            <div class="card-body mt-4">
+                <span class="h3">
+                    Gestionar
+                </span>
+                <button class="btn btn-dark btn-lg float-end" routerLink='/servicios/registro-servicios'>Agregar servicio</button>
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre de Servicio</th>
+                            <th>Tipo Servicio</th>
+                            <th>Precio</th>
+                            <th>Descripción</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let servicio of servicios">
+                            <td><strong>{{ servicio.idServicio }}</strong></td>
+                            <td>{{ servicio.nombreServicio }}</td>
+                            <td>{{ servicio.idTipoServicio.tipoServicio }}</td>
+                            <td>{{ servicio.precioServicio }}</td>
+                            <td>{{ servicio.descripcion }}</td>
+                            <td>
+                                <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarServicio(servicio.idServicio)"></i>
+                                <i (click)="eliminar(servicio)" class="fa-solid fa-trash" style="color: #c00c0c; cursor: pointer;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

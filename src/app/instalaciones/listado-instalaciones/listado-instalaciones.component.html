@@ -1,1 +1,42 @@
-<p>listado-instalaciones works!</p>
+<app-sidebar></app-sidebar>
+
+<section class="ochenta">
+    <div class="container mt-4">
+        <div class="mx-3">
+            <span class="h1">
+                Instalaciones
+            </span>
+            <div class="card-body mt-4">
+                <span class="h3">
+                    Gestionar
+                </span>
+                <button class="btn btn-dark btn-lg float-end" routerLink='/instalaciones/registro-instalaciones'>Agregar instalación</button>
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Venta</th>
+                            <th>Empleado</th>
+                            <th>Instalador</th>
+                            <th>Fecha de Instalación</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let instalacion of instalaciones">
+                            <td><strong>{{ instalacion.idInstalacion }}</strong></td>
+                            <td>Id: <strong>{{ instalacion.idVenta.idVenta }}</strong> - {{ instalacion.idVenta.fechaVenta | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+                            <td>Id: <strong>{{instalacion.idEmpleadoRegistro.idEmpleado}}</strong> - {{instalacion.idEmpleadoRegistro.nombreEmpleado}} {{instalacion.idEmpleadoRegistro.apellidoPaEmpleado}}</td>
+                            <td>Id: <strong>{{instalacion.idEmpleadoInstalador.idEmpleado}}</strong> - {{instalacion.idEmpleadoInstalador.nombreEmpleado}} {{instalacion.idEmpleadoInstalador.apellidoPaEmpleado}}</td>
+                            <td>{{ instalacion.fechaInstalacion | date:'dd/MM/yyyy' }}</td>
+                            <td>
+                                <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarInstalacion(instalacion.idInstalacion)"></i>
+                                <i (click)="eliminarInstalacion(instalacion)" class="fa-solid fa-trash" style="color: #c00c0c; cursor: pointer;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

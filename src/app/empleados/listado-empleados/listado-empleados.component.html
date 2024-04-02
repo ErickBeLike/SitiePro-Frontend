@@ -1,1 +1,51 @@
-<p>listado-empleados works!</p>
+<app-sidebar></app-sidebar>
+<section class="ochenta">
+    <div class="container mt-4">
+        <div class="mx-3">
+            <span class="h1">
+                Empleados
+            </span>
+            <div class="card-body mt-4">
+                <span class="h3">
+                    Gestionar
+                </span>
+                <button class="btn btn-dark btn-lg float-end" routerLink='/empleados/registro-empleados'>Agregar empleado</button>
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido paterno</th>
+                            <th>Apellido materno</th>
+                            <th>Cargo</th>
+                            <th>Fecha de nacimiento</th>
+                            <th>Sexo</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let empleado of empleados">
+                            <td><strong>{{empleado.idEmpleado }}</strong></td>
+                            <td>{{empleado.nombreEmpleado }}</td>
+                            <td>{{empleado.apellidoPaEmpleado }}</td>
+                            <td>{{empleado.apellidoMaEmpleado }}</td>
+                            <td>{{empleado.idCargo.nombreCargo}} </td>
+                            <td>{{empleado.fechaDeNacimiento }}</td>
+                            <td>{{empleado.idSexo.nombreSexo }}</td>
+                            <td> {{empleado.correoEmpleado}} </td>
+                            <td> {{empleado.numeroEmpleado}} </td>
+                            <td> {{empleado.direccionEmpleado}} </td>
+                            <td>
+                                <i class="fa-solid fa-pen-to-square me-3" style="color: #25a701; cursor: pointer;" (click)="editarEmpleado(empleado.idEmpleado)"></i>
+                                <i (click)="eliminar(empleado)" class="fa-solid fa-trash" style="color: #c00c0c; cursor: pointer;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</section>
