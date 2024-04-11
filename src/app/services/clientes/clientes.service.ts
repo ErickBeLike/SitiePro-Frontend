@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,23 +12,33 @@ export class ClientesService {
   constructor(private http: HttpClient) { }
 
   obtenerTodosLosClientes(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl, this.getHttpOptions());
   }
 
   buscarClienteId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`, this.getHttpOptions());
   }
 
   agregarCliente(cliente: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, cliente);
+    return this.http.post<any>(this.apiUrl, cliente, this.getHttpOptions());
   }
 
   actualizarCliente(id: number, cliente: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, cliente);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, cliente, this.getHttpOptions());
   }
 
   eliminarCliente(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, this.getHttpOptions());
+  }
+
+  private getHttpOptions() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
   }
 
 }

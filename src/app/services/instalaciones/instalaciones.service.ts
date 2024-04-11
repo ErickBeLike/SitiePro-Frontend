@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,21 +12,32 @@ export class InstalacionesService {
   constructor(private http: HttpClient) { }
 
   obtenerTodasLasInstalaciones(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl, this.getHttpOptions());
   }
 
   buscarInstalacionId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`, this.getHttpOptions());
   }
 
   agregarInstalacion(instalacion: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, instalacion);
+    return this.http.post<any>(this.apiUrl, instalacion, this.getHttpOptions());
   }
 
   actualizarInstalacion(id: number, instalacion: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, instalacion);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, instalacion, this.getHttpOptions());
   }
 
   eliminarInstalacion(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
-  }}
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, this.getHttpOptions());
+  }
+
+  private getHttpOptions() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
+}

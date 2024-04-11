@@ -23,6 +23,10 @@ import { RegistroVentasComponent } from './ventas/registro-ventas/registro-venta
 import { ListadoInstalacionesComponent } from './instalaciones/listado-instalaciones/listado-instalaciones.component';
 import { RegistroInstalacionesComponent } from './instalaciones/registro-instalaciones/registro-instalaciones.component';
 
+import { AdminGuard } from './admin.guard';
+import { AuthGuard } from './auth.guard';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -32,8 +36,9 @@ const routes: Routes = [
   //Dashboard
   {
     path: 'dashboard',
-    component: DashboardComponent
-  },
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+    },
 
   //Login
   {
@@ -44,85 +49,103 @@ const routes: Routes = [
   //Clientes
   {
     path: 'clientes/listado-clientes',
-    component: ListadoClientesComponent
+    component: ListadoClientesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'clientes/registro-clientes',
-    component: RegistroClientesComponent
+    component: RegistroClientesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'clientes/registro-clientes/:id',
-    component: RegistroClientesComponent
+    component: RegistroClientesComponent,
+    canActivate: [AuthGuard]
   },
 
   // Empleados
   {
     path: 'empleados/listado-empleados',
-    component: ListadoEmpleadosComponent
+    component: ListadoEmpleadosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'empleados/registro-empleados',
-    component: RegistroEmpleadosComponent
+    component: RegistroEmpleadosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'empleados/registro-empleados/:id',
-    component: RegistroEmpleadosComponent
+    component: RegistroEmpleadosComponent,
+    canActivate: [AuthGuard]
   },
 
   // Usuarios
   {
     path: 'usuarios/listado-usuarios',
-    component: ListadoUsuariosComponent
+    component: ListadoUsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'usuarios/registro-usuarios',
-    component: RegistroUsuariosComponent
+    component: RegistroUsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'usuarios/registro-usuarios/:id',
-    component: RegistroUsuariosComponent
+    component: RegistroUsuariosComponent,
+    canActivate: [AuthGuard]
   },
 
   // Servicios
   {
     path: 'servicios/listado-servicios',
-    component: ListadoServiciosComponent
+    component: ListadoServiciosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'servicios/registro-servicios',
-    component: RegistroServiciosComponent
+    component: RegistroServiciosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'servicios/registro-servicios/:id',
-    component: RegistroServiciosComponent
+    component: RegistroServiciosComponent,
+    canActivate: [AuthGuard]
   },
 
   // Ventas
   {
     path: 'ventas/listado-ventas',
-    component: ListadoVentasComponent
+    component: ListadoVentasComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ventas/registro-ventas',
-    component: RegistroVentasComponent
+    component: RegistroVentasComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ventas/registro-ventas/:id',
-    component: RegistroVentasComponent
+    component: RegistroVentasComponent,
+    canActivate: [AuthGuard]
   },
 
   // Instalaciones
   {
     path: 'instalaciones/listado-instalaciones',
-    component: ListadoInstalacionesComponent
+    component: ListadoInstalacionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'instalaciones/registro-instalaciones',
-    component: RegistroInstalacionesComponent
+    component: RegistroInstalacionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'instalaciones/registro-instalaciones/:id',
-    component: RegistroInstalacionesComponent
+    component: RegistroInstalacionesComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

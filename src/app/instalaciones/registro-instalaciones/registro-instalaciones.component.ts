@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InstalacionesService } from '../../services/instalaciones/instalaciones.service';
 import { EmpleadosService } from '../../services/empleados/empleados.service';
 import { VentasService } from '../../services/ventas/ventas.service';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+
 
 @Component({
   selector: 'app-registro-instalaciones',
@@ -28,12 +30,13 @@ export class RegistroInstalacionesComponent implements OnInit{
       private router: Router,
       private route: ActivatedRoute
   ) {
-      this.formInstalacion = this.fb.group({
-        idVenta: ['', Validators.required],
-        idEmpleadoRegistro: ['', Validators.required],
-        idEmpleadoInstalador: ['', Validators.required],
-        fechaInstalacion: ['', Validators.required],
-      });
+    this.formInstalacion = this.fb.group({
+      idVenta: ['', Validators.required],
+      idEmpleadoRegistro: ['', Validators.required],
+      idEmpleadoInstalador: ['', Validators.required],
+      fechaInstalacion: ['', [Validators.required, fechaInstalacionValidator()]], 
+    });
+    
 
       this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -106,3 +109,21 @@ export class RegistroInstalacionesComponent implements OnInit{
       );
   }
 }
+
+function fechaInstalacionValidator(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const fechaInstalacion = control.value;
+    if (fechaInstalacion) {
+      const fecha = new Date(fechaInstalacion);
+      const fechaActual = new Date();
+      const limiteInferior = new Date(fechaActual.getFullYear(), 0, 1); // Primer día del año actual
+      const limiteSuperior = new Date(fechaActual.getFullYear(), 11, 31); // Último día del año actual
+
+      if (isNaN(fecha.getTime()) || fecha < fechaActual || fecha > limiteSuperior) {
+        return { 'fechaInvalida': true };
+      }
+    }
+    return null;
+  };
+}
+

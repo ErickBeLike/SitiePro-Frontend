@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login/login.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +9,19 @@ import { LoginService } from '../../services/login/login.service';
 })
 export class LoginComponent {
   credentials = {
-    correo: '',
-    contrasena: '',
+    correoUsuario: '',
+    contrasenaUsuario: '',
   };
 
   error: string = ''; 
   showPassword: boolean = false;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.loginService.login(this.credentials).subscribe(
-      (response) => {
-        console.log('Login exitoso', response);
+    this.authService.login(this.credentials).subscribe(
+      () => {
+        console.log('Login exitoso');
         this.router.navigate(['/dashboard']);
       },
       (error) => {
